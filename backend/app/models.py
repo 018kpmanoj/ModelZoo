@@ -39,7 +39,7 @@ class Message(Base):
     tokens_used = Column(Integer, nullable=True)
     response_time = Column(Float, nullable=True)  # in seconds
     timestamp = Column(DateTime, default=datetime.utcnow)
-    metadata = Column(JSON, nullable=True)
+    extra_data = Column(JSON, nullable=True)
     
     session = relationship("ChatSession", back_populates="messages")
     suggestions = relationship("Suggestion", back_populates="message", cascade="all, delete-orphan")

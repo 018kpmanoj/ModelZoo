@@ -136,7 +136,7 @@ class ChatService:
         complexity_score: Optional[float] = None,
         tokens_used: Optional[int] = None,
         response_time: Optional[float] = None,
-        metadata: Optional[Dict] = None
+        extra_data: Optional[Dict] = None
     ) -> Message:
         """Add a message to a session."""
         message = Message(
@@ -149,7 +149,7 @@ class ChatService:
             tokens_used=tokens_used,
             response_time=response_time,
             timestamp=datetime.utcnow(),
-            metadata=metadata
+            extra_data=extra_data
         )
         db.add(message)
         
@@ -238,7 +238,7 @@ class ChatService:
             model_used=response["model"],
             tokens_used=response.get("tokens_used"),
             response_time=response.get("response_time"),
-            metadata={"analysis": analysis}
+            extra_data={"analysis": analysis}
         )
         
         # Generate title if first message

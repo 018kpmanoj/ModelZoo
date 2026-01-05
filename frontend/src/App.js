@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 import {
   MessageSquare, Send, Plus, Trash2, Menu, X, Star, ChevronDown,
-  Cpu, Zap, Bot, User, Clock, Sparkles, Settings, Info, ThumbsUp, ThumbsDown
+  Cpu, Zap, Bot, User, Clock, Sparkles, Info, ThumbsUp, ThumbsDown
 } from 'lucide-react';
 
 const API_BASE = 'http://localhost:8000';

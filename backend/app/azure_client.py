@@ -18,7 +18,7 @@ class AzureOpenAIClient:
     def initialize(self):
         """Initialize the Azure OpenAI clients."""
         if not settings.azure_openai_endpoint or not settings.azure_openai_api_key:
-            print("⚠️ Azure OpenAI credentials not configured - using mock responses")
+            print("[WARN] Azure OpenAI credentials not configured - using mock responses")
             self._initialized = False
             return
             
@@ -34,9 +34,9 @@ class AzureOpenAIClient:
                 api_version=settings.azure_openai_api_version
             )
             self._initialized = True
-            print("✅ Azure OpenAI client initialized successfully!")
+            print("[OK] Azure OpenAI client initialized successfully!")
         except Exception as e:
-            print(f"❌ Failed to initialize Azure OpenAI client: {e}")
+            print(f"[ERROR] Failed to initialize Azure OpenAI client: {e}")
             self._initialized = False
     
     @property
@@ -97,10 +97,10 @@ class AzureOpenAIClient:
             }
             
         except Exception as e:
-            print(f"❌ Azure OpenAI error: {e}")
+            print(f"[ERROR] Azure OpenAI error: {e}")
             # Attempt fallback
             if model_id == "gpt-4":
-                print("↪️ Falling back to GPT-3.5 Turbo...")
+                print("[FALLBACK] Falling back to GPT-3.5 Turbo...")
                 return await self.chat_completion(
                     messages, "gpt-35-turbo", max_tokens, temperature, stream
                 )
@@ -142,7 +142,7 @@ class AzureOpenAIClient:
                     yield chunk.choices[0].delta.content
                     
         except Exception as e:
-            print(f"❌ Azure OpenAI streaming error: {e}")
+            print(f"[ERROR] Azure OpenAI streaming error: {e}")
             yield f"Error: {str(e)}"
     
     async def get_embedding(self, text: str) -> List[float]:
@@ -167,7 +167,7 @@ class AzureOpenAIClient:
             )
             return response.data[0].embedding
         except Exception as e:
-            print(f"❌ Embedding error: {e}")
+            print(f"[ERROR] Embedding error: {e}")
             raise
     
     async def _mock_response(

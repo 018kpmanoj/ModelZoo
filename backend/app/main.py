@@ -23,13 +23,13 @@ from app.models import (
 async def lifespan(app: FastAPI):
     """Application lifespan events."""
     # Startup
-    print("🚀 Starting ModelZoo Backend...")
+    print("[*] Starting ModelZoo Backend...")
     await init_db()
     azure_client.initialize()
-    print("✅ ModelZoo Backend is ready!")
+    print("[OK] ModelZoo Backend is ready!")
     yield
     # Shutdown
-    print("👋 Shutting down ModelZoo Backend...")
+    print("[*] Shutting down ModelZoo Backend...")
     await close_db()
 
 
